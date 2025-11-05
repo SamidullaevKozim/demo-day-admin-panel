@@ -43,7 +43,7 @@ export function DefaultSidebar() {
             Meat
           </ListItem>
         </Link>
-        <Link to={"/fruitsCreate"}>
+        <Link to={"/create"}>
           <ListItem>
             <ListItemPrefix>
               <PresentationChartBarIcon className="h-5 w-5" />

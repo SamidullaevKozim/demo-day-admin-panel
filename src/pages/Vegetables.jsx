@@ -7,6 +7,7 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 const Vegetables = () => {
   async function handleGet() {
     const res = await instance.get("/newApi");
@@ -73,6 +74,9 @@ const Vegetables = () => {
           >
             Delete
           </Button>
+          <Link to={`/vegetablesUpdate/${vegetable.id}`}>
+            <Button>Update</Button>
+          </Link>
         </Card>
       ))}
     </div>

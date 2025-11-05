@@ -7,6 +7,7 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const Meat = () => {
   async function handleGet() {
@@ -74,6 +75,11 @@ const Meat = () => {
           >
             Delete
           </Button>
+          <Link to={`/meatsUpdate/${meat.id}`}>
+          <Button>
+            Update
+          </Button>
+          </Link>
         </Card>
       ))}
     </div>

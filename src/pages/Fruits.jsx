@@ -5,7 +5,9 @@ import {
   CardHeader,
   CardBody,
   Typography,
+  Button,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 const Fruits = () => {
   async function handleGet() {
     const res = await instance.get("/newApi");
@@ -64,13 +66,16 @@ const Fruits = () => {
               {fruit.desc}
             </Typography>
           </CardBody>
-          <button
+          <Button
             onClick={() => {
               mutation.mutate(fruit.id);
             }}
           >
             delete
-          </button>
+          </Button>
+          <Link to={`/fruitsUpdate/${fruit.id}`}>
+            <Button>Update</Button>
+          </Link>
         </Card>
       ))}
     </div>
