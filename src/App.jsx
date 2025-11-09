@@ -10,17 +10,19 @@ import MeatUpdate from "./pages/MeatUpdate";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="fruits" element={<Fruits />} />
-        <Route path="vegetables" element={<Vegetables />} />
-        <Route path="meats" element={<Meat />} />
-        <Route path="create" element={<CreatePage />} />
-        <Route path="fruitsUpdate/:id" element={<FruitUpdate />} />
-        <Route path="vegetablesUpdate/:id" element={<VegetablesUpdate />} />
-        <Route path="meatsUpdate/:id" element={<MeatUpdate />} />
-      </Route>
-    </Routes>
+    <div className="bg-gradient-to-br from-blue-gray-50 to-white">
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="fruits" element={<Fruits />} />
+          <Route path="vegetables" element={<Vegetables />} />
+          <Route path="meats" element={<Meat />} />
+          <Route path="create" element={<CreatePage />} />
+          <Route path="fruitsUpdate/:id" element={<FruitUpdate />} />
+          <Route path="vegetablesUpdate/:id" element={<VegetablesUpdate />} />
+          <Route path="meatsUpdate/:id" element={<MeatUpdate />} />
+        </Route>
+      </Routes>
+    </div>
   );
 };
 

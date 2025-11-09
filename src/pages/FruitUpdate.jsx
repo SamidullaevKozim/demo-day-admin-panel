@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 const FruitUpdate = () => {
   const { id } = useParams();
-  let nav = useNavigate();
+  const nav = useNavigate();
 
   const {
     register,
@@ -38,9 +38,7 @@ const FruitUpdate = () => {
   });
 
   useEffect(() => {
-    if (data) {
-      reset(data);
-    }
+    if (data) reset(data);
   }, [data, reset]);
 
   const onSubmit = (formData) => {
@@ -48,50 +46,63 @@ const FruitUpdate = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50 w-full">
+    <div className="relative flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-gray-50 to-white w-full px-4">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md space-y-5"
+        className="bg-white/70 backdrop-blur-xl border border-blue-gray-100 shadow-lg shadow-blue-gray-200/40 rounded-2xl p-8 w-full max-w-md space-y-5 transition-all"
       >
-        <h2 className="text-2xl font-semibold text-gray-800 text-center">
-          Update product
+        <h2 className="text-2xl font-semibold text-blue-gray-800 text-center">
+          Update Product
         </h2>
 
-        <input
-          {...register("img")}
-          type="text"
-          placeholder="Image URL"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none transition-all"
-        />
+        <div className="space-y-3">
+          <input
+            {...register("img")}
+            type="text"
+            placeholder="Image URL"
+            className="w-full border border-blue-gray-200 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all"
+          />
 
-        <input
-          {...register("title")}
-          type="text"
-          placeholder="Title"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none transition-all"
-        />
+          <input
+            {...register("title")}
+            type="text"
+            placeholder="Title"
+            className="w-full border border-blue-gray-200 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all"
+          />
 
-        <input
-          {...register("desc")}
-          type="text"
-          placeholder="Description"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none transition-all"
-        />
+          <textarea
+            {...register("desc")}
+            placeholder="Description"
+            className="w-full border border-blue-gray-200 rounded-lg px-4 py-2 text-blue-gray-700 focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none transition-all resize-none h-24"
+          />
 
-        <input
-          {...register("price")}
-          type="text"
-          placeholder="Price"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none transition-all"
-        />
+          <input
+            {...register("price")}
+            type="text"
+            placeholder="Price"
+            className="w-full border border-blue-gray-200 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all"
+          />
+        </div>
+
         <button
           type="submit"
-          className="w-full bg-green-500 text-white font-semibold py-2 rounded-lg hover:bg-green-600 transition-all duration-200"
+          className={`w-full text-white font-semibold py-2 rounded-lg shadow-sm transition-all duration-200 ${
+            mutation.isPending
+              ? "bg-indigo-300 cursor-not-allowed"
+              : "bg-indigo-500 hover:bg-indigo-600"
+          }`}
           disabled={mutation.isPending}
         >
           {mutation.isPending ? "Updating..." : "Update"}
         </button>
       </form>
+
+      <button
+        onClick={() => nav("/fruits")}
+        className="fixed bottom-6 right-6 bg-indigo-500 hover:bg-indigo-600 text-white font-medium px-5 py-2 rounded-full shadow-lg shadow-indigo-200/50 transition-all duration-200"
+      >
+        Back
+      </button>
     </div>
   );
 };
