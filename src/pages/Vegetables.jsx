@@ -2,6 +2,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import instance from "../utils/axios";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const Loader = () => (
+  <div className="fixed inset-0 flex items-center justify-center  bg-gray-400/30  z-50">
+    <div className="w-16 h-16 border-4 border-blue-300 border-t-blue-600 rounded-full animate-spin"></div>
+  </div>
+);
 
 const Vegetables = () => {
   async function handleGet() {
@@ -23,7 +30,7 @@ const Vegetables = () => {
   const mutation = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
-      alert("Product deleted");
+      toast.error("Product deleted");
       queryClient.invalidateQueries(["getVegetables"]);
     },
   });
@@ -31,7 +38,7 @@ const Vegetables = () => {
   const vegetables = data?.filter((item) => item.category === "vegetables");
 
   if (error) return <h1>{error.message}</h1>;
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <Loader />;
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-blue-gray-50 to-white py-10 px-6">

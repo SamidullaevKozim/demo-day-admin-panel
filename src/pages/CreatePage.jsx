@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import instance from "../utils/axios";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CreatePage = () => {
   const nav = useNavigate();
@@ -14,10 +15,10 @@ const CreatePage = () => {
   const mutation = useMutation({
     mutationFn: handleCreate,
     onSuccess: (data) => {
-      alert("Product created");
+      toast.success("product created!")
 
       if (data.category === "fruits") {
-        nav("/fruits");
+        nav("/");
       } else if (data.category === "vegetables") {
         nav("/vegetables");
       } else if (data.category === "meats") {

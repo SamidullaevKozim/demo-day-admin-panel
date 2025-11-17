@@ -24,7 +24,7 @@ export function DefaultSidebar() {
       </div>
 
       <List className="space-y-2">
-        <Link to={"/fruits"}>
+        <Link to={"/"}>
           <ListItem className="hover:bg-blue-50 transition-all duration-200 rounded-lg text-blue-gray-700 hover:text-blue-600">
             <ListItemPrefix>
               <PresentationChartBarIcon className="h-5 w-5 text-blue-500" />

@@ -1,10 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import instance from "../utils/axios";
-import {
-  Typography,
-  Button,
-} from "@material-tailwind/react";
+import { Typography, Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const Loader = () => (
+  <div className="fixed inset-0 flex items-center justify-center bg-gray-400/30 z-50">
+    <div className="w-16 h-16 border-4 border-blue-300 border-t-blue-600 rounded-full animate-spin"></div>
+  </div>
+);
 
 const Fruits = () => {
   async function handleGet() {
@@ -26,7 +30,7 @@ const Fruits = () => {
   const mutation = useMutation({
     mutationFn: handleDelete,
     onSuccess: () => {
-      alert("Info deleted");
+      toast.error("Product deleted");
       queryClient.invalidateQueries(["getFruits"]);
     },
   });
@@ -34,7 +38,7 @@ const Fruits = () => {
   const fruits = data?.filter((item) => item.category === "fruits");
 
   if (error) return <h1>{error.message}</h1>;
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <Loader />;
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-blue-gray-50 to-white py-10 px-6">
@@ -42,16 +46,29 @@ const Fruits = () => {
         <table className="min-w-full divide-y divide-blue-gray-200">
           <thead className="bg-blue-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-blue-gray-700">Image</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-blue-gray-700">Title</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-blue-gray-700">Price</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-blue-gray-700">Description</th>
-              <th className="px-6 py-3 text-center text-sm font-semibold text-blue-gray-700">Actions</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-blue-gray-700">
+                Image
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-blue-gray-700">
+                Title
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-blue-gray-700">
+                Price
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-blue-gray-700">
+                Description
+              </th>
+              <th className="px-6 py-3 text-center text-sm font-semibold text-blue-gray-700">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-blue-gray-200">
             {fruits?.map((fruit) => (
-              <tr key={fruit.id} className="hover:bg-blue-gray-50 transition-all">
+              <tr
+                key={fruit.id}
+                className="hover:bg-blue-gray-50 transition-all"
+              >
                 <td className="px-6 py-4">
                   <img
                     src={fruit.img}
@@ -59,9 +76,15 @@ const Fruits = () => {
                     className="h-16 w-16 object-cover rounded-lg"
                   />
                 </td>
-                <td className="px-6 py-4 text-blue-gray-800 font-medium">{fruit.title}</td>
-                <td className="px-6 py-4 text-indigo-600 font-semibold">{fruit.price} som</td>
-                <td className="px-6 py-4 text-blue-gray-600 text-sm">{fruit.desc}</td>
+                <td className="px-6 py-4 text-blue-gray-800 font-medium">
+                  {fruit.title}
+                </td>
+                <td className="px-6 py-4 text-indigo-600 font-semibold">
+                  {fruit.price} som
+                </td>
+                <td className="px-6 py-4 text-blue-gray-600 text-sm">
+                  {fruit.desc}
+                </td>
                 <td className="px-6 py-4 flex justify-center gap-2">
                   <Button
                     onClick={() => mutation.mutate(fruit.id)}

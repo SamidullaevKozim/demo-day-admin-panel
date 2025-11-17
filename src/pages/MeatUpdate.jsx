@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import instance from "../utils/axios";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const MeatUpdate = () => {
   let { id } = useParams();
@@ -27,7 +28,7 @@ const MeatUpdate = () => {
   const mutation = useMutation({
     mutationFn: handleUpdateMeats,
     onSuccess: () => {
-      alert("product updated");
+      toast.success("Product Updated")
       nav("/meats");
     },
   });

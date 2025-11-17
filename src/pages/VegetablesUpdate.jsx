@@ -3,6 +3,7 @@ import instance from "../utils/axios";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const VegetablesUpdate = () => {
   let { id } = useParams();
@@ -27,7 +28,7 @@ const VegetablesUpdate = () => {
   const mutation = useMutation({
     mutationFn: handleUpdateVegetables,
     onSuccess: () => {
-      alert("product updated");
+      toast.success("Product Updated")
       nav("/vegetables");
     },
   });
